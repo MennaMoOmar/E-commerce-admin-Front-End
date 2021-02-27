@@ -20,11 +20,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let product of productInfoArr; index as i">
+                        <tr *ngFor="let product of mycartObj; index as i">
                             <td ><img [src]="productImgoArr[i]"></td>
-                            <td>{{productInfoArr[i].name}}</td>
-                            <td> <i class="fas fa-minus" (click)="minus(i,$event)"></i> {{productInfoArr[i].quantity}} <i class="fas fa-plus" (click)="add(i,$event)"></i> </td>
-                            <td>{{price[i]}}</td>
+                            <td>{{mycartObj[i].name}}</td>
+                            <td> <i class="fas fa-minus" (click)="minus(i,$event)"></i> {{mycartObj[i].quantity}} <i class="fas fa-plus" (click)="add(i,$event)"></i> </td>
+                            <td>{{mycartObj[i].current_price * mycartObj[i].quantity}}</td>
                             <td><i class="fas fa-trash-alt" (click)="deleteProduct(i,$event)"></i></td>                            
                         </tr>
                     </tbody>
@@ -43,7 +43,7 @@
                 <h4>Cart Total Price</h4>
                 <p>$ {{totalPrice}}</p>
                 <!-- <button class="btn rounded-0" id="buyNow" (click)="crmOrder()">Confirm Order</button> -->
-                <button class="btn rounded-0" id="buyNow" (click)="crmOrder()" [routerLink]="['/cartBuy']" >Confirm Order</button>
+                <button class="btn rounded-0" id="buyNow" [routerLink]="['/cartBuy']" >Confirm Order</button>
             </div>
         </div>
     </div>

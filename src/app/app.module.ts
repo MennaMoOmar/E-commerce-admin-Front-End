@@ -32,6 +32,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /* imports materialui */
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { OrderCompletedComponent } from './components/order-completed/order-completed.component';
 const materialUi = [
   MatProgressSpinnerModule
 ]
@@ -67,6 +68,7 @@ const materialUi = [
     ConfirmedComponent,
     FailComponent,
     ResetpasswordComponent,
+    OrderCompletedComponent,
   ],
   imports: [
     BrowserModule,

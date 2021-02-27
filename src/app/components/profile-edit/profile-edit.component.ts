@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../services/users.service'
 import { ImageService } from '../../services/image.service'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject,throwError } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { shareReplay, catchError } from 'rxjs/operators';
 
 
@@ -32,7 +32,8 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   subscriberimg
   isFetch = false
   error = null
-
+  isFetching=true
+  isError=true
 
   /*change select*/
   onChange = (value: any) => {
@@ -60,6 +61,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     console.log(this.myForm.controls)
     if (this.myForm.valid) {
       console.log("valid")
+      // this.isError = true
       // console.log(this.myForm.value)
       const userinfoEdited = {
         "email": this.myForm.value.email,
@@ -75,12 +77,13 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       const userinfoEditedJson = JSON.stringify(userinfoEdited)
       this.subscriber = this.myService.editUser(userinfoEditedJson)
         .subscribe((userinfoEditedJson) => {
+          // this.isError = true
           console.log(userinfoEditedJson);
           this.passwordErr = "hide"
         },
           (error) => {
             console.log(error);
-            this.error= "ddddddd"
+            this.error = "ddddddd"
           }
         )
     }
@@ -98,8 +101,10 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
 
   /*get user profile*/
   showProfile() {
+    this.isFetching = true
     this.subscriber = this.myService.getProfile()
       .subscribe((userr) => {
+      this.isFetching = false
         console.log(userr);
         this.user = userr;
         this.myForm.patchValue({

@@ -41,7 +41,7 @@
     padding: 0px 15px;
 }
 #cart .fa-minus:hover ,
- #cart .fa-plus:hover{
+#cart .fa-plus:hover{
      cursor: pointer;
      /* color: #F65B5F; */
      transform: scale(1.1);

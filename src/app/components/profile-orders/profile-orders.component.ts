@@ -33,7 +33,7 @@ export class ProfileOrdersComponent implements OnInit {
     this.isFetching=true
     this.subscriber = this.myService.displayOrders()
       .subscribe((orders) => {
-        this.isFetching=false
+    this.isFetching=false
         console.log(orders);
         // console.log(Object.values(orders)[0][0]._id) //order id
         const ordersArr = Object.values(orders)[0]

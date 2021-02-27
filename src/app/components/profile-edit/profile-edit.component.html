@@ -1,6 +1,6 @@
 <div id="profile-edit" class="container">
     <div class="row  justify-content-center">
-        <form [formGroup]="myForm">
+        <form [formGroup]="myForm" *ngIf="!isFetching">
             <div class="form-row">
                 <div class="col-md-12 mb-3">
                     <img [src]="profImage">
@@ -160,9 +160,9 @@
                             <div *ngIf="passwordErr=='show'">
                                 <p [class]="passwordErr">invalid password</p>
                             </div>
-                            <div *ngIf="!error">
+                            <!-- <div *ngIf="!error">
                                 <p>invalid</p>
-                            </div>
+                            </div> -->
                             <!-- <p [innerHtml]="htmlToAdd"></p> -->
                         </div>
                     </div>
@@ -240,5 +240,8 @@
                     class="far fa-trash-alt"></i> Delete Account
             </button>
         </form>
+        <div  *ngIf="isFetching">
+            <mat-spinner class="loading"></mat-spinner>
+        </div>
     </div>
 </div>

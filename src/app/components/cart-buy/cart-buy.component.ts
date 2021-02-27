@@ -16,9 +16,12 @@ export class CartBuyComponent implements OnInit, OnDestroy {
   /*services*/
   user
   subscriber
+  mycart = localStorage.getItem('cart')
+  mycartObj = JSON.parse(this.mycart)
+  order = []
 
-    //retrieve from local storage
-    localStorageProductsRetrive = localStorage.getItem('cart');
+  //retrieve from local storage
+  localStorageProductsRetrive = localStorage.getItem('cart');
 
   /*validation on editing*/
   myForm = new FormGroup({
@@ -40,7 +43,7 @@ export class CartBuyComponent implements OnInit, OnDestroy {
       console.log("valid")
       console.log(this.myForm.value)
       const orderinfo = {
-        "products" : JSON.parse(localStorage.getItem('order')),
+        "products": JSON.parse(localStorage.getItem('order')),
         "note": this.myForm.value.note,
         "address": [`${this.myForm.value.country}`, `${this.myForm.value.city}`, `${this.myForm.value.street}`].join(', '),
       }
@@ -48,6 +51,8 @@ export class CartBuyComponent implements OnInit, OnDestroy {
       this.subscriber = this.myServiceOrder.addOrder(orderinfoJson)
         .subscribe((orderinfoJson) => {
           console.log(orderinfoJson);
+          document.getElementsByTagName('form')[0].style.display='none'
+          document.getElementById('orderSuccess').style.display='flex'
         },
           (error) => {
             console.log(error);
@@ -59,36 +64,44 @@ export class CartBuyComponent implements OnInit, OnDestroy {
     }
   }
 
+  /*get user by id*/
+  showProfile() {
+    this.localStorageBuy()
+    this.subscriber = this.myService.getProfile()
+      .subscribe((userr) => {
+        console.log(userr);
+        this.user = userr;
+        this.myForm.patchValue({
+          firstname: this.user.user.firstname,
+          lastname: this.user.user.lastname,
+          phone: this.user.user.phones,
+          country: this.user.user.addresses.split(', ')[0],
+          city: this.user.user.addresses.split(', ')[1],
+          street: this.user.user.addresses.split(', ')[2]
+        })
+      },
+        (error) => {
+          console.log(error);
+        }
+      )
+  }
 
-/*get user by id*/
-showProfile() {
-  this.subscriber = this.myService.getProfile()
-    .subscribe((userr) => {
-      console.log(userr);
-      this.user = userr;
-      this.myForm.patchValue({
-        firstname: this.user.user.firstname,
-        lastname: this.user.user.lastname,
-        phone: this.user.user.phones,
-        country: this.user.user.addresses.split(', ')[0],
-        city: this.user.user.addresses.split(', ')[1],
-        street: this.user.user.addresses.split(', ')[2]
-      })
-    },
-      (error) => {
-        console.log(error);
-      }
-    )
-}
+  /* local strorage */
+  localStorageBuy(){
+    console.log(this.mycartObj)
+    for (let i = 0; i < this.mycartObj.length; i++) {
+      this.order.push({ productId: this.mycartObj[i].productId, quantity: this.mycartObj[i].quantity })
+      localStorage.setItem('order', JSON.stringify(this.order))
+    }
+  }
 
 
+  ngOnInit(): void {
+    this.showProfile()
+  }
 
-ngOnInit(): void {
-  this.showProfile()
-}
-
-ngOnDestroy(): void {
-  this.subscriber.unsubscribe();
-}
+  ngOnDestroy(): void {
+    this.subscriber.unsubscribe();
+  }
 
 }

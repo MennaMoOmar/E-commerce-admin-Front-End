@@ -49,6 +49,9 @@ export class CartComponent implements OnInit, OnDestroy {
     }
   ]
 
+  mycart = localStorage.getItem('cart')
+  mycartObj = JSON.parse(this.mycart)
+
 
 
   /*get product by id*/
@@ -67,56 +70,98 @@ export class CartComponent implements OnInit, OnDestroy {
 
   /*set orders*/
   setProductOnCart() {
-    for (let i = 0; i < this.cart.length; i++) {
-      var id = Object.values(this.cart)[i]['productId']
-      this.productInfoArr.push(this.cart[i])
-      this.price.push(this.cart[i].current_price * this.cart[i].quantity)
-      this.productImgoArr.push(`https://amnesia-skincare.herokuapp.com/api/images/show/${this.productInfoArr[i].image}`)
-      this.totalPrice += this.productInfoArr[i].current_price * this.productInfoArr[i].quantity
+    console.log(this.mycartObj)
+    for (let i = 0; i < this.mycartObj.length; i++) {
+      this.price.push(this.mycartObj[i].current_price * this.mycartObj[i].quantity)
+      this.productImgoArr.push(`https://amnesia-skincare.herokuapp.com/api/images/show/${this.mycartObj[i].image}`)
+      this.totalPrice += this.mycartObj[i].current_price * this.mycartObj[i].quantity
     }
   }
 
   /* add quantity */
   add(index) {
-    this.productInfoArr[index].quantity++
-    this.totalPrice += this.productInfoArr[index].current_price
-    this.price[index] += this.productInfoArr[index].current_price
+    this.mycartObj[index].quantity++
+    this.totalPrice += this.mycartObj[index].current_price
+    this.price[index] += this.mycartObj[index].current_price
+    localStorage.setItem('cart', JSON.stringify(this.mycartObj))
   }
 
   /* minus quantity */
   minus(index) {
-    if (this.productInfoArr[index].quantity > 1) {
-      this.productInfoArr[index].quantity--
-      this.totalPrice -= this.productInfoArr[index].current_price
-      this.price[index] -= this.productInfoArr[index].current_price
+    if (this.mycartObj[index].quantity > 1) {
+      this.mycartObj[index].quantity--
+      this.totalPrice -= this.mycartObj[index].current_price
+      this.price[index] -= this.mycartObj[index].current_price
+      localStorage.setItem('cart', JSON.stringify(this.mycartObj))
     }
   }
 
 
   /*delete product from cart*/
   deleteProduct(index, e) {
-    this.cart.splice(index, 1)
+    this.totalPrice -= this.mycartObj[index].current_price * this.mycartObj[index].quantity
+    this.mycartObj.splice(index, 1)
+    // this.mycartObj.splice(this.price, 1)
     document.getElementsByTagName("tr")[parseInt(index) + 1].style.display = "none";
     // document.getElementsByTagName("tr")[parseInt(index) + 1].remove();
-    this.totalPrice -= this.productInfoArr[index].current_price * this.productInfoArr[index].quantity
+    // console.log(this.mycartObj[index])
+    localStorage.setItem('cart', JSON.stringify(this.mycartObj))
   }
 
-  /* confirm order*/
-  crmOrder() {
-    console.log(this.cart)
-    localStorage.removeItem('order')
-    for (let i = 0; i < this.cart.length; i++) {
-      this.order.push({ productId: this.cart[i].productId, quantity: this.cart[i].quantity })
-      localStorage.setItem('order', JSON.stringify(this.order))
-    }
-    console.log(this.order)
-  }
+
+  // /*set orders*/
+  // setProductOnCart() {
+  //   for (let i = 0; i < this.cart.length; i++) {
+  //     var id = Object.values(this.cart)[i]['productId']
+  //     this.productInfoArr.push(this.cart[i])
+  //     this.price.push(this.cart[i].current_price * this.cart[i].quantity)
+  //     this.productImgoArr.push(`https://amnesia-skincare.herokuapp.com/api/images/show/${this.productInfoArr[i].image}`)
+  //     this.totalPrice += this.productInfoArr[i].current_price * this.productInfoArr[i].quantity
+  //   }
+  // }
+
+  // /* add quantity */
+  // add(index) {
+  //   this.productInfoArr[index].quantity++
+  //   this.totalPrice += this.productInfoArr[index].current_price
+  //   this.price[index] += this.productInfoArr[index].current_price
+  // }
+
+  // /* minus quantity */
+  // minus(index) {
+  //   if (this.productInfoArr[index].quantity > 1) {
+  //     this.productInfoArr[index].quantity--
+  //     this.totalPrice -= this.productInfoArr[index].current_price
+  //     this.price[index] -= this.productInfoArr[index].current_price
+  //   }
+  // }
+
+
+  // /*delete product from cart*/
+  // deleteProduct(index, e) {
+  //   this.cart.splice(index, 1)
+  //   document.getElementsByTagName("tr")[parseInt(index) + 1].style.display = "none";
+  //   // document.getElementsByTagName("tr")[parseInt(index) + 1].remove();
+  //   this.totalPrice -= this.productInfoArr[index].current_price * this.productInfoArr[index].quantity
+  // }
+
+  // /* confirm order*/
+  // crmOrder() {
+  //   console.log(this.cart)
+  //   localStorage.removeItem('order')
+  //   for (let i = 0; i < this.cart.length; i++) {
+  //     this.order.push({ productId: this.cart[i].productId, quantity: this.cart[i].quantity })
+  //     localStorage.setItem('order', JSON.stringify(this.order))
+  //   }
+  //   console.log(this.order)
+  // }
 
   /*onInt*/
   ngOnInit(): void {
     this.setProductOnCart()
 
     //store in local storage
+    // localStorage.setItem('cart', JSON.stringify(this.cart))
     localStorage.setItem('cart', JSON.stringify(this.cart))
   }
 
