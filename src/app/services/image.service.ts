@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,18 +22,34 @@ export class ImageService {
     //     Authorization: this.token
     //   })
     // }
-    return this.myClient.get(`${this.baseURL}/images/show/${imgname}`, {responseType:'blob'});
+    return this.myClient.get(`${this.baseURL}/images/show/${imgname}`, { responseType: 'blob' });
   }
 
+  // //post edit profile image
+  // editUserImg(userImgEdited) {
+  //   console.log(userImgEdited)
+  //   const httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json',
+  //       image: userImgEdited
+  //     })
+  //   };
+  //   return this.myClient.post(`${this.baseURL}/images/user/`, userImgEdited, httpOptions);
+  // }
+
   //patch edit profile image
-  editUserImg(userImgEdited) {
-    console.log(userImgEdited)
+  editUserImg(image: File):Observable<any>{
+    // debugger;
+    let formData = new FormData();
+    console.log(image)
+    formData.append('image', image,image.name);
+    console.log(formData.get('image'));
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        image: userImgEdited
+        'Authorization': this.token
       })
-    };
-    return this.myClient.post(`${this.baseURL}/images/user/`, userImgEdited, httpOptions);
+    }
+    return this.myClient.post(`${this.baseURL}/images/user/`, formData, httpOptions);
   }
 }

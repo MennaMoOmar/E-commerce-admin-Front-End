@@ -5,6 +5,16 @@ import { ImageService } from '../../services/image.service'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, throwError } from 'rxjs';
 import { shareReplay, catchError } from 'rxjs/operators';
+import { formatDate } from '@angular/common';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+
+
+
+class ImageSnippet {
+  constructor(public src: string, public file: File) { }
+}
 
 
 @Component({
@@ -17,7 +27,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   profImage: String;
 
   /*ctor*/
-  constructor(private myService: UsersService, private myServiceImg: ImageService, private myActivatedRoute: ActivatedRoute) { }
+  constructor(private myService: UsersService, private myServiceImg: ImageService, private http: HttpClient, private myActivatedRoute: ActivatedRoute, private router:Router) { }
 
   self = this
   htmlToAdd
@@ -32,8 +42,9 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   subscriberimg
   isFetch = false
   error = null
-  isFetching=true
-  isError=true
+  isFetching = true
+  isFetchingImg = false
+  isError = true
 
   /*change select*/
   onChange = (value: any) => {
@@ -79,6 +90,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         .subscribe((userinfoEditedJson) => {
           // this.isError = true
           console.log(userinfoEditedJson);
+          this.reloadComponent();
           this.passwordErr = "hide"
         },
           (error) => {
@@ -92,19 +104,13 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     }
   }
 
-  /* changeImg */
-  changeImg(e) {
-    console.log(e.target.value)
-    this.userimg = e.target.value
-    this.editProfileImage()
-  }
 
   /*get user profile*/
   showProfile() {
     this.isFetching = true
     this.subscriber = this.myService.getProfile()
       .subscribe((userr) => {
-      this.isFetching = false
+        this.isFetching = false
         console.log(userr);
         this.user = userr;
         this.myForm.patchValue({
@@ -143,19 +149,51 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   // }
 
 
+  /* changeImg */
+  // changeImg(e) {
+  //   console.log(this.profImage);
+  //   console.log(e.target.value)
+  //   this.userimg = e.target.value;
+
+  //   // this.editProfileImage()
+  // }
+
+
   /*post user image*/
-  editProfileImage() {
-    console.log(this.userimg)
-    const userImgEdited = this.userimg
-    this.subscriberimg = this.myServiceImg.editUserImg(userImgEdited)
-      .subscribe((userImgEdited) => {
-        console.log(userImgEdited);
-      },
-        (error) => {
-          console.log(error);
-        }
-      )
+  // editProfileImage() {
+  //   console.log(this.userimg)
+  //   const userImgEdited = this.userimg
+  //   this.subscriberimg = this.myServiceImg.editUserImg(userImgEdited)
+  //     .subscribe((userImgEdited) => {
+  //       console.log(userImgEdited);
+  //     },
+  //       (error) => {
+  //         console.log(error);
+  //       }
+  //     )
+  // }
+
+
+  selectedFile: ImageSnippet;
+  processFile(imageInput: any) {
+    const file: File = imageInput.files[0];
+    const reader = new FileReader();
+    reader.addEventListener('load', (event: any) => {
+      this.selectedFile = new ImageSnippet(event.target.result, file);
+      this.myServiceImg.editUserImg(this.selectedFile.file)
+        .subscribe((res) => {
+          console.log("ssssss");
+          console.log(res);
+        },
+          (err) => {
+            console.log("rrr");
+            console.log(err);
+          })
+    });
+
+    reader.readAsDataURL(file);
   }
+
 
   /*delete*/
   deleteAccount() {
@@ -172,6 +210,43 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     }
   }
 
+  /* upload Image */
+  private baseURL: string = "https://amnesia-skincare.herokuapp.com/api"
+  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMxYTM0NzI4MmQ4MDAwMTVmODczZjgiLCJpYXQiOjE2MTQ0NDE1NzV9.y3PBLeU1Y-SlAxmqVKjTiT8BMnbVPEIgFy8hs7VHiRA'
+  selectedFile2: File = null
+  onFileSelected(event) {
+    console.log(event);
+    this.selectedFile2 = <File>event.target.files[0]
+  }
+  onUpload() {
+    this.isFetchingImg = true
+    const httpOptions = {
+      headers: new HttpHeaders({
+        // 'Content-Type': 'application/json',
+        'Authorization': this.token
+      })
+    }
+    const fd = new FormData();
+    fd.append('image', this.selectedFile2, this.selectedFile2.name)
+    console.log(fd);
+    this.http.post(`${this.baseURL}/images/user/`, fd, httpOptions)
+      .subscribe(res => {
+        this.isFetchingImg = false
+        console.log(res)
+        this.reloadComponent()
+      },
+        (err) => {
+          console.log(err);
+        })
+  }
+
+  /* reload existing component */
+  reloadComponent() {
+    let currentUrl = this.router.url;
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+        this.router.navigate([currentUrl]);
+    }
 
   /*oninit*/
   ngOnInit(): void {

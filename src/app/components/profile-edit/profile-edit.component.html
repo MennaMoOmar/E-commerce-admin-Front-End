@@ -1,13 +1,18 @@
 <div id="profile-edit" class="container">
     <div class="row  justify-content-center">
-        <form [formGroup]="myForm" *ngIf="!isFetching">
+        <form [formGroup]="myForm" *ngIf="!isFetching" enctype="multipart/form-data" method="POST">
             <div class="form-row">
                 <div class="col-md-12 mb-3">
                     <img [src]="profImage">
                     <label for="img">
                         <i class="fas fa-2x fa-camera-retro"></i>
                     </label>
-                    <input type="file" id="img" name="img" (click)="changeImg($event)">
+                    <input type="file" id="img" (change)="onFileSelected($event)">
+                    <div class="lds-ellipsis" *ngIf="isFetchingImg"><div></div><div></div><div></div><div></div></div>
+                    <!-- <input #imageInput type="file" name="image" accept="image/*" (change)="processFile(imageInput)"> -->
+                    <!-- <input type="file" (change)="onFileSelected($event)"> -->
+                    <span (click)="onUpload()" id='saveImg'>Update Image</span>
+                    <!-- <button type="button" (click)="onUpload()">Uplaad</button> -->
                 </div>
                 <!-- first name -->
                 <div class="col-md-5 mb-3">
@@ -240,7 +245,7 @@
                     class="far fa-trash-alt"></i> Delete Account
             </button>
         </form>
-        <div  *ngIf="isFetching">
+        <div *ngIf="isFetching">
             <mat-spinner class="loading"></mat-spinner>
         </div>
     </div>
