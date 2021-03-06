@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms'
 import{ ReactiveFormsModule } from "@angular/forms"
 import {UsersService} from './services/users.service'
 import { HttpClientModule} from '@angular/common/http'
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 // import {RouterModule, Routes} from '@angular/router'
 // import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
@@ -28,26 +29,38 @@ import { ConfirmedComponent } from './confirmed/confirmed.component';
 import { FailComponent } from './components/fail/fail.component';
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {StarRatingComponent} from './components/star-rating/star-rating.component';
+import { ProductViewComponent } from './components/product-view/product-view.component';
+import { FailedComponent } from './components/failed/failed.component';
+import {ProductCardComponent} from './components/product-card/product-card.component';
+import{ProductsListComponent} from './components/products-list/products-list.component'
 
 
 /* imports materialui */
+import { MatSliderModule } from '@angular/material/slider';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSelectModule} from '@angular/material/select';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { OrderCompletedComponent } from './components/order-completed/order-completed.component';
 const materialUi = [
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatGridListModule,
+  MatSliderModule,
+  MatExpansionModule,
+  MatSelectModule,
+  MatCheckboxModule,
+  MatButtonModule,
+  MatIconModule,
+  MatDialogModule,
+  MatSnackBarModule,
 ]
 
-
-// const  routes : Routes = [
-//   {path:'', component:ProfileComponent},
-//   {path:'profile', component:ProfileComponent},
-//   {path:'profileEdit', component:ProfileEditComponent},
-//   {path:'profileOrders', component:ProfileOrdersComponent},
-//   {path:'profileOrderDetails', component:ProfileOrderDetailComponent},
-//   {path:'cart', component:CartComponent},
-//   {path:'cartBuy', component:CartBuyComponent},
-//   {path:'cartEmpty', component:CartEmptyComponent}
-// ]
 
 @NgModule({
   declarations: [
@@ -69,17 +82,20 @@ const materialUi = [
     FailComponent,
     ResetpasswordComponent,
     OrderCompletedComponent,
+    ProductViewComponent,
+    StarRatingComponent,
+    FailedComponent,
+    ProductCardComponent,
+    ProductsListComponent
   ],
   imports: [
     BrowserModule,
-    // RouterModule,
     FormsModule,
-    // RouterModule.forRoot(routes),
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    // AngularFontAwesomeModule
+    FontAwesomeModule,
     ...materialUi
   ],
   providers: [

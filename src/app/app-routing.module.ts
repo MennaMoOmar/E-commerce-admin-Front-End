@@ -17,6 +17,10 @@ import { CartBuyComponent } from './components/cart-buy/cart-buy.component';
 import {ConfirmedComponent} from './components/confirmed/confirmed.component'
 import {FailComponent} from './components/fail/fail.component'
 import {ResetpasswordComponent} from './components/resetpassword/resetpassword.component'
+import { ProductViewComponent } from './components/product-view/product-view.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
+import{ProductsListComponent} from './components/products-list/products-list.component'
+
 
 const  routes : Routes = [
   {path:'', component:ProfileComponent},
@@ -30,7 +34,10 @@ const  routes : Routes = [
   {path:'confirmed', component:ConfirmedComponent},
   {path:'fail', component:FailComponent},
   {path:'resetpassword/:token', component:ResetpasswordComponent},
-  {path:'footer', component:FooterComponent}
+  {path:'footer', component:FooterComponent},
+  {path:'productInfo/:_id', component:ProductViewComponent},
+  // {path:'productCard', component: ProductCardComponent},
+  {path: 'productList', component:ProductsListComponent}
 ]
 
 @NgModule({

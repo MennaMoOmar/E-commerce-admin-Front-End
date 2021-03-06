@@ -7,11 +7,11 @@
                     <label for="img">
                         <i class="fas fa-2x fa-camera-retro"></i>
                     </label>
-                    <input type="file" id="img" (change)="onFileSelected($event)">
+                    <input type="file" id="img" (change)="onUpload($event)">
                     <div class="lds-ellipsis" *ngIf="isFetchingImg"><div></div><div></div><div></div><div></div></div>
                     <!-- <input #imageInput type="file" name="image" accept="image/*" (change)="processFile(imageInput)"> -->
                     <!-- <input type="file" (change)="onFileSelected($event)"> -->
-                    <span (click)="onUpload()" id='saveImg'>Update Image</span>
+                    <!-- <span (click)="onUpload()" id='saveImg'>Update Image</span> -->
                     <!-- <button type="button" (click)="onUpload()">Uplaad</button> -->
                 </div>
                 <!-- first name -->

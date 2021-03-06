@@ -81,9 +81,9 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         "addresses": [`${this.myForm.value.country}`, `${this.myForm.value.city}`, `${this.myForm.value.street}`].join(', '),
         "phones": this.myForm.value.phone,
         "userPassword": this.myForm.value.password,
-        "gender": this.genderAns,
+        "gender": this.genderAns?"male":new Error("jujuh")
       }
-      // console.log(this.profileImage)
+      console.log(this.genderAns)
       console.log(userinfoEdited)
       const userinfoEditedJson = JSON.stringify(userinfoEdited)
       this.subscriber = this.myService.editUser(userinfoEditedJson)
@@ -113,6 +113,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
         this.isFetching = false
         console.log(userr);
         this.user = userr;
+        this.genderAns = this.user.user.gender
         this.myForm.patchValue({
           firstname: this.user.user.firstname,
           lastname: this.user.user.lastname,
@@ -218,7 +219,10 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
     console.log(event);
     this.selectedFile2 = <File>event.target.files[0]
   }
-  onUpload() {
+  onUpload(event) {
+    // console.log(event);
+    this.selectedFile2 = <File>event.target.files[0]
+    console.log("uploaded")
     this.isFetchingImg = true
     const httpOptions = {
       headers: new HttpHeaders({
