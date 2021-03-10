@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {FormsModule} from '@angular/forms'
-import{ ReactiveFormsModule } from "@angular/forms"
-import {UsersService} from './services/users.service'
-import { HttpClientModule} from '@angular/common/http'
+import { FormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from "@angular/forms"
+import { UsersService } from './services/users.service'
+import { HttpClientModule } from '@angular/common/http'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 // import {RouterModule, Routes} from '@angular/router'
 // import { AngularFontAwesomeModule } from 'angular-font-awesome';
@@ -29,25 +29,38 @@ import { ConfirmedComponent } from './confirmed/confirmed.component';
 import { FailComponent } from './components/fail/fail.component';
 import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {StarRatingComponent} from './components/star-rating/star-rating.component';
+import { StarRatingComponent } from './components/star-rating/star-rating.component';
 import { ProductViewComponent } from './components/product-view/product-view.component';
 import { FailedComponent } from './components/failed/failed.component';
-import {ProductCardComponent} from './components/product-card/product-card.component';
-import{ProductsListComponent} from './components/products-list/products-list.component'
+import { ProductCardComponent } from './components/product-card/product-card.component';
+import { ProductsListComponent } from './components/products-list/products-list.component';
+import { OrderCompletedComponent } from './components/order-completed/order-completed.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { AdminUserComponent } from './components/admin-user/admin-user.component';
+import { AdminUserOrdersComponent } from './components/admin-user-orders/admin-user-orders.component';
+import { AdminAllOrdersComponent } from './components/admin-all-orders/admin-all-orders.component';
+import { AdminOrderDetailsComponent } from './components/admin-order-details/admin-order-details.component';
+import { AdminProductsComponent } from './components/admin-products/admin-products.component';
+import { AdminProductAddComponent } from './components/admin-product-add/admin-product-add.component';
+// import{DefaultLayoutComponent} from './components/containers/default-layout/default-layout.component'
 
 
 /* imports materialui */
 import { MatSliderModule } from '@angular/material/slider';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatSelectModule} from '@angular/material/select';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import { OrderCompletedComponent } from './components/order-completed/order-completed.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+
+
+
 const materialUi = [
   MatProgressSpinnerModule,
   MatGridListModule,
@@ -59,6 +72,7 @@ const materialUi = [
   MatIconModule,
   MatDialogModule,
   MatSnackBarModule,
+  MatFormFieldModule
 ]
 
 
@@ -86,7 +100,14 @@ const materialUi = [
     StarRatingComponent,
     FailedComponent,
     ProductCardComponent,
-    ProductsListComponent
+    ProductsListComponent,
+    AdminDashboardComponent,
+    AdminUserComponent,
+    AdminUserOrdersComponent,
+    AdminAllOrdersComponent,
+    AdminOrderDetailsComponent,
+    AdminProductsComponent,
+    AdminProductAddComponent,
   ],
   imports: [
     BrowserModule,

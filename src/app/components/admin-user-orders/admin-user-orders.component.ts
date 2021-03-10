@@ -1,46 +1,44 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { OrdersService } from '../../services/orders.service'
-import { shareReplay } from 'rxjs/operators';
-
-/*material ui*/
-// import {ThemePalette} from '@angular/material/core';
-// import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
 
 
-/************/
 @Component({
-  selector: 'app-profile-orders',
-  templateUrl: './profile-orders.component.html',
-  styleUrls: ['./profile-orders.component.css'],
+  selector: 'app-admin-user-orders',
+  templateUrl: './admin-user-orders.component.html',
+  styleUrls: ['./admin-user-orders.component.css']
 })
-export class ProfileOrdersComponent implements OnInit {
+export class AdminUserOrdersComponent implements OnInit {
 
-  constructor(private myService: OrdersService, private myActivated: ActivatedRoute) { }
+  constructor(private myService: OrdersService) { }
 
   /*var*/
   orders
   subscriber
   totalPriceArr: Array<number> = []
   ordersId: Array<number> = []
+
   isFetching = false
-  canCancel = false
-  isError= false
 
   // showAllOrders
   showAllOrders() {
     // this.subscriber = this.myService.displayOrders().pipe(shareReplay({ bufferSize: 1, refCount: true }))
+    console.log(this.isFetching)
     this.isFetching = true
-    this.isError= false
     this.subscriber = this.myService.displayOrders()
       .subscribe((orders) => {
         this.isFetching = false
-        this.isError = false
         console.log(orders);
         // console.log(Object.values(orders)[0][0]._id) //order id
         const ordersArr = Object.values(orders)[0]
         this.orders = ordersArr
         console.log(this.orders) //array of orders
+        // console.log(this.orders.length)
+        // console.log(this.orders[0].products) //array of products in single order
+        // console.log(this.orders[0].products.length)
+        // console.log(this.orders[0].products[0].quantity)
+        // console.log(this.orders[0].products[0].productId)
+        // console.log(this.orders[0].products[0].productId.current_price)
+
 
         for (let i = 0; i < this.orders.length; i++) {
           var total = 0;
@@ -59,23 +57,8 @@ export class ProfileOrdersComponent implements OnInit {
       },
         (error) => {
           console.log(error);
-          this.isError = true
-          this.isFetching=false
         }
       )
-  }
-
-  /* cancel Order*/
-  cancelOrder(id){
-    console.log(id);
-    this.subscriber = this.myService.deleteOrderById(id)
-    .subscribe((response:any)=>{
-      console.log("deleted")
-      this.orders=response.orders
-    },
-    (err)=>{
-      console.log(err);
-    })
   }
 
 

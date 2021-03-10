@@ -83,14 +83,13 @@
     color: #FFFFFF;
     box-shadow: 5px 5px 5px #95959595;
 }
-#orders #viewDetails,
-#orders #cancelOrder{
+#orders #viewDetails{
     background-color: #FFFFFF;
     outline: none;
-    border: 1px solid #1B8EB7;
+    border: 1px solid #F65B5F;
     background-image: 
-      linear-gradient(to top, hsl(0, 0%, 100%) 50%, #1B8EB7 50%),
-      linear-gradient(to top, #1B8EB7 50%, transparent 50%);
+      linear-gradient(to top, hsl(0, 0%, 100%) 50%, #F65B5F 50%),
+      linear-gradient(to top, #F65B5F 50%, transparent 50%);
     -webkit-background-clip: text,padding-box;
     background-clip: text,padding-box;
     -webkit-text-fill-color: transparent;
@@ -98,20 +97,6 @@
     background-position: top;
     transition: background-position 0.5s ease-in-out;
 }
-#orders #viewDetails:hover,
-#orders #cancelOrder:hover{
+#orders #viewDetails:hover{
     background-position: bottom;
-}
-#orders #cancelOrder,
-#orders #cancelOrder[disabled]{
-  border: 1px solid #F63C3A;
-  background-image: 
-    linear-gradient(to top, hsl(0, 0%, 100%) 50%, #F63C3A 50%),
-    linear-gradient(to top, #F63C3A 50%, transparent 50%);
-}
-
-#orders .error{
-  padding: 20px;
-  text-align: center;
-  font-size: 1.5rem;
 }

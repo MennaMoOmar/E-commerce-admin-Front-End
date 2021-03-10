@@ -9,10 +9,6 @@
                     </label>
                     <input type="file" id="img" (change)="onUpload($event)">
                     <div class="lds-ellipsis" *ngIf="isFetchingImg"><div></div><div></div><div></div><div></div></div>
-                    <!-- <input #imageInput type="file" name="image" accept="image/*" (change)="processFile(imageInput)"> -->
-                    <!-- <input type="file" (change)="onFileSelected($event)"> -->
-                    <!-- <span (click)="onUpload()" id='saveImg'>Update Image</span> -->
-                    <!-- <button type="button" (click)="onUpload()">Uplaad</button> -->
                 </div>
                 <!-- first name -->
                 <div class="col-md-5 mb-3">
@@ -31,7 +27,7 @@
                             <input type="text" class="form-control" appValidationCorrect id="firtname"
                                 placeholder="First name" name="firstname" formControlName="firstname" required>
                         </ng-template>
-                        <div *ngIf="myForm.controls.firstname.errors" class="error text-danger">
+                        <div *ngIf="myForm.controls.firstname.errors && myForm.controls.firstname.touched" class="error text-danger">
                             <p *ngIf="myForm.controls.firstname.errors.required">Name is Required</p>
                             <p *ngIf="myForm.controls.firstname.errors.maxlength">Name must be less than 8 characters
                             </p>
@@ -104,7 +100,6 @@
                         </ng-template>
                         <div *ngIf="myForm.controls.phone.errors" class="error text-danger">
                             <p *ngIf="myForm.controls.phone.errors.required">phone is Required</p>
-                            <!-- <p *ngIf="myForm.controls.phone.errors.pattern">phone must be 11 number</p> -->
                             <p *ngIf="myForm.controls.phone.errors.pattern">phone must be numbers only</p>
                         </div>
                     </div>
@@ -120,24 +115,8 @@
                         </div>
                         <select class="form-control" appValidationCorrect (change)="onChange($event.target.value)">
                             <option selected>{{myForm.value.gender}}</option>
-                            <!-- <option selected>{{genderAns}}</option> -->
                             <option *ngFor="let element of gender" value="{{element}}">{{element}}</option>
-
-                            <!-- <option *ngFor="let element of gender" value="{{element}}">
-                                <select name={{myForm.value.gender}} *ngIf="myForm.value.gender else sel">{{myForm.value.gender}}</select>
-                                <ng-template #sel>
-                                    <option value={{element}}>{{element}}</option>
-                                </ng-template>
-                            </option> -->
                         </select>
-
-                        <!-- <input type="text" class="form-control"
-                            *ngIf="myForm.controls.gender.errors else correctgender" appValidationError
-                            id="gender" placeholder="Gender" name="gender" formControlName="gender" required>
-                        <ng-template #correctgender>
-                            <input type="text" class="form-control" appValidationCorrect id="gender"
-                                placeholder="User name" name="gender" formControlName="gender" required>
-                        </ng-template> -->
                         <div *ngIf="myForm.controls.gender.errors" class="error text-danger">
                             <p *ngIf="myForm.controls.gender.errors.required">Gender is Required</p>
                             <p *ngIf="myForm.controls.gender.errors.maxlength">Gender must be characters only</p>

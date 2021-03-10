@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../services/users.service'
 import { ImageService } from '../../services/image.service'
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -54,12 +55,19 @@ export class ProfileComponent implements OnInit {
     //    console.log(check);
     if (check == 1) {
       this.tab = 'tab1';
-      // this.htmlToAdd = '<app-profile-edit></app-profile-edit>';
+      document.getElementById("profile-edit").style.display="block";
+      document.getElementById("profile-orders").style.display="none";
+      document.getElementById("profile-order-details").style.display="none";
     } else if (check == 2) {
-      // this.htmlToAdd = '<app-profile-orders></app-profile-orders>';
       this.tab = 'tab2';
+      document.getElementById("profile-edit").style.display="none";
+      document.getElementById("profile-orders").style.display="block";
+      document.getElementById("profile-order-details").style.display="none";
     } else {
       this.tab = 'tab3';
+      document.getElementById("profile-edit").style.display="none";
+      document.getElementById("profile-orders").style.display="none";
+      document.getElementById("profile-order-details").style.display="none";
     }
   }
 

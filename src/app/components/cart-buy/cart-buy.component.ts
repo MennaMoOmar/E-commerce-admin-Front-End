@@ -37,31 +37,43 @@ export class CartBuyComponent implements OnInit, OnDestroy {
 
   /*save changes*/
   buy() {
-    // console.log(this.myForm.controls)
-    // console.log(JSON.parse(localStorage.getItem('cart')));
-    if (this.myForm.valid) {
-      console.log("valid")
-      console.log(this.myForm.value)
-      const orderinfo = {
-        "products": JSON.parse(localStorage.getItem('order')),
-        "note": this.myForm.value.note,
-        "address": [`${this.myForm.value.country}`, `${this.myForm.value.city}`, `${this.myForm.value.street}`].join(', '),
-      }
-      const orderinfoJson = JSON.stringify(orderinfo)
-      this.subscriber = this.myServiceOrder.addOrder(orderinfoJson)
-        .subscribe((orderinfoJson) => {
-          console.log(orderinfoJson);
-          document.getElementsByTagName('form')[0].style.display='none'
-          document.getElementById('orderSuccess').style.display='flex'
-        },
-          (error) => {
-            console.log(error);
+    console.log(this.myForm.controls)
+    console.log(JSON.parse(localStorage.getItem('cart')));
+    let token = localStorage.getItem('token') || 'empty token';
+    this.myService.getProfile().subscribe(
+      (user: any) => {
+        console.log(user)
+        //start buy
+        if (this.myForm.valid) {
+          console.log("valid")
+          console.log(this.myForm.value)
+          const orderinfo = {
+            "products": JSON.parse(localStorage.getItem('order')),
+            "note": this.myForm.value.note,
+            "address": [`${this.myForm.value.country}`, `${this.myForm.value.city}`, `${this.myForm.value.street}`].join(', '),
           }
-        )
-    }
-    else {
-      console.log("invalid")
-    }
+          const orderinfoJson = JSON.stringify(orderinfo)
+          this.subscriber = this.myServiceOrder.addOrder(orderinfoJson)
+            .subscribe((orderinfoJson) => {
+              console.log(orderinfoJson);
+              localStorage.setItem('cart',JSON.stringify([]));
+              document.getElementsByTagName('form')[0].style.display = 'none'
+              document.getElementById('orderSuccess').style.display = 'flex'
+            },
+              (error) => {
+                console.log(error);
+              }
+            )
+        }
+        else {
+          console.log("invalid")
+        }
+        // end buy
+      },
+      (err) => {
+        console.log(err)
+      }
+    )
   }
 
   /*get user by id*/
@@ -87,7 +99,7 @@ export class CartBuyComponent implements OnInit, OnDestroy {
   }
 
   /* local strorage */
-  localStorageBuy(){
+  localStorageBuy() {
     console.log(this.mycartObj)
     for (let i = 0; i < this.mycartObj.length; i++) {
       this.order.push({ productId: this.mycartObj[i].productId, quantity: this.mycartObj[i].quantity })

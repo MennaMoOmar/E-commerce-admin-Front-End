@@ -26,7 +26,7 @@ export class ProductViewComponent implements OnInit {
     status:"normal"
   };
   rate = 3;
-  star;
+  star = ["grey","grey","grey","grey","grey"];
   reviews =12;
   id;
   constructor(private service:ServiceMainService, private router: Router,private route: ActivatedRoute) { 
@@ -42,8 +42,8 @@ export class ProductViewComponent implements OnInit {
         console.log(this.user.favoriteProducts)
         let found = this.user.favoriteProducts.find((product)=>product._id == this.id);
         console.log(found)
-        this.product.rating = found.rating;
-        console.log()
+        this.product.rating = (found)?found.rating:0;
+        console.log(this.product.rating)
         this.star =  getRating(Number(this.product.rating));
         console.log(this.star)
         if(found){
@@ -59,7 +59,6 @@ export class ProductViewComponent implements OnInit {
     console.log(found)
     if(found){
       this.addToCartBtn = "Added";
-      
     }
   }
   ngOnInit(): void {
@@ -100,11 +99,21 @@ export class ProductViewComponent implements OnInit {
   postRating(rating): void{
     this.rate = rating;
     let token = localStorage.getItem('token') || 'empty token';
-    this.service.getProfile(token).subscribe((user:any)=>{
+    this.service.getProfile(token).subscribe(
+      (user:any)=>{
+        console.log(user)
         this.service.postRatingById(token,rating,this.id).subscribe((product: any)=>{
+          console.log(product,rating,this.id)
           this.product=product.product;
           this.star =  getRating(Number(this.product.rating));
+        },
+        err=>{
+          console.log(err)
         })
+    },
+    (err)=>{
+      console.log(err);
+      this.router.navigate(['']);
     })
   }
 }

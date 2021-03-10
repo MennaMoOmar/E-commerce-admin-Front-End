@@ -14,24 +14,20 @@ export class OrdersService {
   }
 
   /*local storage*/
-  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMxYTM0NzI4MmQ4MDAwMTVmODczZjgiLCJpYXQiOjE2MTQ0NDE1NzV9.y3PBLeU1Y-SlAxmqVKjTiT8BMnbVPEIgFy8hs7VHiRA'
-
-  localStorageToken = (token) => {
-    localStorage.setItem('token', token)
-    return localStorage.getItem('token');
-  }
-
+  token = localStorage.getItem("token")|| "no token"
+  // token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMxYTM0NzI4MmQ4MDAwMTVmODczZjgiLCJpYXQiOjE2MTQ0NDE1NzV9.y3PBLeU1Y-SlAxmqVKjTiT8BMnbVPEIgFy8hs7VHiRA'
   private baseURL: string = "https://amnesia-skincare.herokuapp.com/api"
 
     /*diplay orders*/
     displayOrders() {
+      console.log(this.token)
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
           Authorization: this.token
         })
       };
-      return this.myClient.get(`${this.baseURL}/orders/all`, httpOptions);
+      return this.myClient.get(`${this.baseURL}/orders/fetch/all2`, httpOptions);
     }
 
       /*diplay one order*/
@@ -59,6 +55,7 @@ export class OrdersService {
   /*patch add order*/
   addOrder(orderinfoJson) {
     console.log(orderinfoJson)
+    console.log(this.token)
     console.log(typeof orderinfoJson)
     const httpOptions = {
       headers: new HttpHeaders({
@@ -78,5 +75,16 @@ export class OrdersService {
       })
     };
     return this.myClient.delete(`${this.baseURL}/product/`, httpOptions);
+  }
+
+  /* delete order by id */
+  deleteOrderById(id){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: this.token
+      })
+    };
+    return this.myClient.delete(`${this.baseURL}/orders/${id}`, httpOptions);
   }
 }

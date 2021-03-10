@@ -26,11 +26,11 @@ export class ProfileOrderDetailComponent implements OnInit {
 
   /* order details*/
   orderDetails() {
-    this.isFetching=true
+    this.isFetching = true
     console.log(this.myActivated.snapshot.params.id)
     this.subscriber = this.myService.displayOneOrder(this.myActivated.snapshot.params.id)
       .subscribe((order) => {
-    this.isFetching=false
+        this.isFetching = false
         console.log(order)
         this.order = order
         this.payment = this.order.order.paymentMethod
@@ -39,7 +39,7 @@ export class ProfileOrderDetailComponent implements OnInit {
           this.quantityArr.push(this.order.order.products[i].quantity)
           this.currPriceArr.push(this.order.order.products[i].productId.current_price)
           this.oldPriceArr.push(this.order.order.products[i].productId.old_price)
-          this.totalCurrPriceArr += this.order.order.products[i].productId.current_price*this.order.order.products[i].quantity
+          this.totalCurrPriceArr += this.order.order.products[i].productId.current_price * this.order.order.products[i].quantity
         }
       },
         (error) => {

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { from } from 'rxjs';
 import { Input } from '@angular/core';
-import { BehaviorSubject,throwError } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { shareReplay, catchError } from 'rxjs/operators';
 
 
@@ -20,16 +20,11 @@ export class UsersService {
 
   tokenpw
 
-    /*local storage*/
-    token = localStorage.getItem('token') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDMxYTM0NzI4MmQ4MDAwMTVmODczZjgiLCJpYXQiOjE2MTQ0NDE1NzV9.y3PBLeU1Y-SlAxmqVKjTiT8BMnbVPEIgFy8hs7VHiRA'
-    localStorageToken = (token)=>{
-      localStorage.setItem('token', token)
-      return localStorage.getItem('token');
-    }
- 
+  /*local storage*/
+  token = localStorage.getItem('token') || 'no token'
+
 
   private baseURL: string = "https://amnesia-skincare.herokuapp.com/api"
-  // private baseURL:string = "http://localhost:3000/users";
 
   // get all users
   // getUsers(){
@@ -61,18 +56,18 @@ export class UsersService {
     return this.myClient.patch(`${this.baseURL}/users/`, userinfoEditedJson, httpOptions);
   }
 
-    //patch resetpw
-    crnPassword(userpwJson,tokencrpw) {
-      console.log(userpwJson)
-      console.log(this.token)
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          Authorization: tokencrpw
-        })
-      };
-      return this.myClient.post(`${this.baseURL}/users/reset/password`, userpwJson, httpOptions);
-    }
+  //patch resetpw
+  crnPassword(userpwJson, tokencrpw) {
+    console.log(userpwJson)
+    console.log(this.token)
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Authorization: tokencrpw
+      })
+    };
+    return this.myClient.post(`${this.baseURL}/users/reset/password`, userpwJson, httpOptions);
+  }
 
   //delete user id
   deleteUser() {
