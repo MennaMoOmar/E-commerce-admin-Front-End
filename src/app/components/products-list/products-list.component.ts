@@ -21,7 +21,11 @@ export class ProductsListComponent implements OnInit {
   appear: boolean = false;
   skipGlobal
   limitGlobal
-  noOfProducts=0
+  noOfProducts = 0
+
+  /*ctor*/
+  constructor(private productService: ProductService) { }
+
 
   formatLabel(value: number) {
     if (value >= 1000) {
@@ -30,13 +34,13 @@ export class ProductsListComponent implements OnInit {
 
     return value;
   }
+
   slider(event) {
     console.log(event.value)
     this.obj = this.allData.filter((product) => {
       return Number(product.current_price) <= Number(event.value)
     })
   }
-  constructor(private productService: ProductService) { }
 
   getData(skip, take) {
     this.loading = true;
@@ -46,11 +50,9 @@ export class ProductsListComponent implements OnInit {
       (response: any) => {
         this.loading = false;
         this.appear = true;
-
         this.allData = response.products;
         console.log(this.allData)
         this.obj = response.products;
-
         this.arrnoOfPages = [];
         this.noOfProducts = response.length
         this.noOfPages = Math.ceil(response.length / 5);
@@ -60,7 +62,6 @@ export class ProductsListComponent implements OnInit {
       },
       (error) => {
         this.loading = false;
-
         console.log(error)
       }
     )

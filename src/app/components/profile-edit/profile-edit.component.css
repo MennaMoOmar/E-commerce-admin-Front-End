@@ -142,4 +142,11 @@
       transform: translate(24px, 0);
     }
   }
+
+#profile-edit .alert-danger.error,
+#profile-edit i.error{
+  padding: 20px;
+  text-align: center;
+  font-size: 1.5rem;
+}
   

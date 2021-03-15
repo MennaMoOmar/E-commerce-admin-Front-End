@@ -57,6 +57,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { AdminProductEditComponent } from './components/admin-product-edit/admin-product-edit.component';
 
 
 
@@ -108,6 +109,7 @@ const materialUi = [
     AdminOrderDetailsComponent,
     AdminProductsComponent,
     AdminProductAddComponent,
+    AdminProductEditComponent,
   ],
   imports: [
     BrowserModule,

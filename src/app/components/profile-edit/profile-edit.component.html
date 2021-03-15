@@ -1,6 +1,6 @@
 <div id="profile-edit" class="container">
     <div class="row  justify-content-center">
-        <form [formGroup]="myForm" *ngIf="!isFetching" enctype="multipart/form-data" method="POST">
+        <form [formGroup]="myForm" *ngIf="!isFetching && !isError" enctype="multipart/form-data" method="POST">
             <div class="form-row">
                 <div class="col-md-12 mb-3">
                     <img [src]="profImage">
@@ -224,8 +224,11 @@
                     class="far fa-trash-alt"></i> Delete Account
             </button>
         </form>
-        <div *ngIf="isFetching">
+        <div *ngIf="isFetching && !isError">
             <mat-spinner class="loading"></mat-spinner>
+        </div>
+        <div *ngIf="!isFetching && isError">
+            <div class="text-danger alert-danger error"><i class="fas fa-exclamation-triangle text-danger"></i> Something Went Wrong</div>
         </div>
     </div>
 </div>

@@ -29,8 +29,8 @@
                 <td>3/5</td>
                 <td>amazing</td>
                 <td>
-                    <i class="far fa-edit" id="edit"> Edit</i>
-                    <i class="far fa-trash-alt" id="delete"> Delete</i>
+                    <i class="far fa-edit" id="edit" (click)="edit()"> Edit</i>
+                    <i class="far fa-trash-alt" id="delete" (click)="delete()"> Delete</i>
                 </td>
             </tr>
         </tbody>
@@ -56,7 +56,9 @@
             </ul>
           </nav>
     </div>
-    <button mat-fab><i class="fas fa-plus fa-2x"></i></button>
+    <button mat-fab id="addingProductBtn" (click)="add()"><i class="fas fa-plus fa-2x"></i></button>
 
-    <app-admin-product-add></app-admin-product-add>
-</section>
+  </section>
+  
+  <app-admin-product-add id="addingProduct"></app-admin-product-add>
+  <app-admin-product-edit id="editingProduct"></app-admin-product-edit>

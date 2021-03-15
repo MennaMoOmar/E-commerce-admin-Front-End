@@ -44,7 +44,7 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   error = null
   isFetching = true
   isFetchingImg = false
-  isError = true
+  isError = false
 
   /*change select*/
   onChange = (value: any) => {
@@ -86,16 +86,18 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       console.log(this.genderAns)
       console.log(userinfoEdited)
       const userinfoEditedJson = JSON.stringify(userinfoEdited)
+      this.isError = false
       this.subscriber = this.myService.editUser(userinfoEditedJson)
         .subscribe((userinfoEditedJson) => {
-          // this.isError = true
+          this.isError = false
           console.log(userinfoEditedJson);
           this.reloadComponent();
           this.passwordErr = "hide"
         },
           (error) => {
             console.log(error);
-            this.error = "ddddddd"
+            this.isError = true
+            this.isFetching=false
           }
         )
     }
@@ -108,9 +110,11 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   /*get user profile*/
   showProfile() {
     this.isFetching = true
+    this.isError = false
     this.subscriber = this.myService.getProfile()
       .subscribe((userr) => {
         this.isFetching = false
+        this.isError = false
         console.log(userr);
         this.user = userr;
         this.genderAns = this.user.user.gender
@@ -130,51 +134,13 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
       },
         (error) => {
           console.log(error);
+          this.isError = true
+          this.isFetching=false
         }
       )
   }
 
-
-  /*get user image*/
-  // showProfileImage() {
-  //   console.log(this.user.user.profileImage)
-  //   this.subscriberimg = this.myServiceImg.getProfileImage(this.user.user.profileImage)
-  //     .subscribe((userr) => {
-  //       console.log(userr);
-  //       this.userimg = this.user.user.profileImage
-  //     },
-  //       (error) => {
-  //         console.log(error);
-  //       }
-  //     )
-  // }
-
-
-  /* changeImg */
-  // changeImg(e) {
-  //   console.log(this.profImage);
-  //   console.log(e.target.value)
-  //   this.userimg = e.target.value;
-
-  //   // this.editProfileImage()
-  // }
-
-
-  /*post user image*/
-  // editProfileImage() {
-  //   console.log(this.userimg)
-  //   const userImgEdited = this.userimg
-  //   this.subscriberimg = this.myServiceImg.editUserImg(userImgEdited)
-  //     .subscribe((userImgEdited) => {
-  //       console.log(userImgEdited);
-  //     },
-  //       (error) => {
-  //         console.log(error);
-  //       }
-  //     )
-  // }
-
-
+  /* load image */
   selectedFile: ImageSnippet;
   processFile(imageInput: any) {
     const file: File = imageInput.files[0];
