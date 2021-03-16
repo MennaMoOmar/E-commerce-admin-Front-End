@@ -12,4 +12,17 @@ export class AdminProductAddComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /*add*/
+  add() {
+    document.getElementById("products").style.display = 'block';
+    document.getElementById("addingProductBtn").style.display = 'block';
+    document.getElementById("addingProduct").style.display = 'none';
+  }
+  /*cancel*/
+  cancel() {
+    document.getElementById("products").style.display = 'block';
+    document.getElementById("addingProductBtn").style.display = 'block';
+    document.getElementById("addingProduct").style.display = 'none';
+  }
+
 }

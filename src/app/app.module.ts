@@ -5,36 +5,15 @@ import { ReactiveFormsModule } from "@angular/forms"
 import { UsersService } from './services/users.service'
 import { HttpClientModule } from '@angular/common/http'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-// import {RouterModule, Routes} from '@angular/router'
-// import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 
 import { AppComponent } from './app.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
-import { ProfileOrdersComponent } from './components/profile-orders/profile-orders.component';
-import { ProfileViewComponent } from './components/profile-view/profile-view.component';
-import { ProfileOrderDetailComponent } from './components/profile-order-detail/profile-order-detail.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { CartComponent } from './components/cart/cart.component';
-import { CartEmptyComponent } from './components/cart-empty/cart-empty.component';
-import { CartBuyComponent } from './components/cart-buy/cart-buy.component';
 import { AppRoutingModule } from './app-routing.module';
 import { from } from 'rxjs';
 import { ValidationDirective } from './directives/validation.directive';
 import { ValidationCorrectDirective } from './directives/validation-correct.directive';
 import { ValidationErrorDirective } from './directives/validation-error.directive';
 import { PasswordErrorDirective } from './directives/password-error.directive';
-import { ConfirmedComponent } from './confirmed/confirmed.component';
-import { FailComponent } from './components/fail/fail.component';
-import { ResetpasswordComponent } from './components/resetpassword/resetpassword.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { StarRatingComponent } from './components/star-rating/star-rating.component';
-import { ProductViewComponent } from './components/product-view/product-view.component';
-import { FailedComponent } from './components/failed/failed.component';
-import { ProductCardComponent } from './components/product-card/product-card.component';
-import { ProductsListComponent } from './components/products-list/products-list.component';
-import { OrderCompletedComponent } from './components/order-completed/order-completed.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { AdminUserComponent } from './components/admin-user/admin-user.component';
 import { AdminUserOrdersComponent } from './components/admin-user-orders/admin-user-orders.component';
@@ -42,7 +21,7 @@ import { AdminAllOrdersComponent } from './components/admin-all-orders/admin-all
 import { AdminOrderDetailsComponent } from './components/admin-order-details/admin-order-details.component';
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
 import { AdminProductAddComponent } from './components/admin-product-add/admin-product-add.component';
-// import{DefaultLayoutComponent} from './components/containers/default-layout/default-layout.component'
+import { AdminProductEditComponent } from './components/admin-product-edit/admin-product-edit.component';
 
 
 /* imports materialui */
@@ -79,28 +58,10 @@ const materialUi = [
 @NgModule({
   declarations: [
     AppComponent,
-    ProfileComponent,
-    ProfileEditComponent,
-    ProfileOrdersComponent,
-    ProfileViewComponent,
-    ProfileOrderDetailComponent,
-    FooterComponent,
-    CartComponent,
-    CartEmptyComponent,
-    CartBuyComponent,
     ValidationDirective,
     ValidationCorrectDirective,
     ValidationErrorDirective,
     PasswordErrorDirective,
-    ConfirmedComponent,
-    FailComponent,
-    ResetpasswordComponent,
-    OrderCompletedComponent,
-    ProductViewComponent,
-    StarRatingComponent,
-    FailedComponent,
-    ProductCardComponent,
-    ProductsListComponent,
     AdminDashboardComponent,
     AdminUserComponent,
     AdminUserOrdersComponent,
@@ -108,6 +69,7 @@ const materialUi = [
     AdminOrderDetailsComponent,
     AdminProductsComponent,
     AdminProductAddComponent,
+    AdminProductEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -115,7 +77,6 @@ const materialUi = [
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule,
     FontAwesomeModule,
     ...materialUi
   ],

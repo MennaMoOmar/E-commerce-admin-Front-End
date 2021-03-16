@@ -36,9 +36,11 @@
 #products #edit{
     color: #1B8EB7;
     margin-right: 15px;
+    cursor: pointer;
 }
 #products #delete{
     color: #F63C3A;
+    cursor: pointer;
 }
 
 /* pagination */
@@ -58,4 +60,9 @@
 }
 .mat-fab.mat-accent{
     background-color: #fabc02;
+}
+
+#addingProduct,
+#editingProduct{
+    display: none;
 }

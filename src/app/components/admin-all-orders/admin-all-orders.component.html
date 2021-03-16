@@ -31,7 +31,7 @@
                             <td>13/3/2020</td>
                             <td>5000</td>
                             <td  style="color:#3A9D5D">accepted</td>
-                            <td> <a href=""><i class="fas fa-info-circle"></i> More Details</a></td>
+                            <td> <a (click)="orderDetails()"><i class="fas fa-info-circle"></i> More Details</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -80,7 +80,7 @@
                             <td>13/3/2020</td>
                             <td>5000</td>
                             <td style="color:#E0A800">pendding</td>
-                            <td> <a href=""><i class="fas fa-info-circle"></i> More Details</a></td>
+                            <td> <a (click)="orderDetails()"><i class="fas fa-info-circle"></i> More Details</a></td>
                             <td>
                                 <i class="fas fa-check ch"> Accept</i>
                                 <i class="fas fa-times"> Reject</i>
@@ -132,7 +132,7 @@
                             <td>13/3/2020</td>
                             <td>5000</td>
                             <td style="color:#F63C3A">rejected</td>
-                            <td> <a href=""><i class="fas fa-info-circle"></i> More Details</a></td>
+                            <td> <a (click)="orderDetails()"><i class="fas fa-info-circle"></i> More Details</a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -160,9 +160,12 @@
                       </nav>
                 </div>
 
+                <app-admin-order-details id="orderDetails"></app-admin-order-details>
+
                 <div  *ngIf="isFetching">
                     <mat-spinner class="loading"></mat-spinner>
                 </div>
+                
             </div>
         </div>
     </div>

@@ -10,47 +10,19 @@ import { OrdersService } from '../../services/orders.service'
 })
 export class AdminOrderDetailsComponent implements OnInit {
 
-  constructor(private myActivated: ActivatedRoute, private myService: OrdersService) { }
+  constructor() { }
 
-/*var*/
-order
-subscriber
-namesArr: Array<string> = []
-quantityArr: Array<number> = []
-currPriceArr: Array<number> = []
-oldPriceArr: Array<number> = []
-totalOldPriceArr = 0
-totalCurrPriceArr = 0
-payment
-isFetching = false
+  /*var*/
+  order
+  subscriber
 
-/* order details*/
-orderDetails() {
-  this.isFetching=true
-  console.log(this.myActivated.snapshot.params.id)
-  this.subscriber = this.myService.displayOneOrder(this.myActivated.snapshot.params.id)
-    .subscribe((order) => {
-  this.isFetching=false
-      console.log(order)
-      this.order = order
-      this.payment = this.order.order.paymentMethod
-      for (let i = 0; i < this.order.order.products.length; i++) {
-        this.namesArr.push(this.order.order.products[i].productId.name)
-        this.quantityArr.push(this.order.order.products[i].quantity)
-        this.currPriceArr.push(this.order.order.products[i].productId.current_price)
-        this.oldPriceArr.push(this.order.order.products[i].productId.old_price)
-        this.totalCurrPriceArr += this.order.order.products[i].productId.current_price*this.order.order.products[i].quantity
-      }
-    },
-      (error) => {
-        console.log(error)
-      }
-    )
-}
+  /* order details*/
+  orderDetails() {
+    console.log("ss")
+  }
 
-/* oninit */
-ngOnInit(): void {
-  this.orderDetails()
-}
+  /* oninit */
+  ngOnInit(): void {
+  }
 
 }

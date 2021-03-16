@@ -143,6 +143,10 @@
   display: none;
 }
 
+#orders a{
+  color: #1A92D3;
+  cursor: pointer;
+}
 #orders .fa-check.ch{
   color: #3A9D5D;
   margin-right: 15px;
@@ -160,4 +164,8 @@
 #orders .page-link{
   color: #F65B5F;
   border: 1px solid #c7c7c7;
+}
+
+#orders #orderDetails{
+  display: none;
 }

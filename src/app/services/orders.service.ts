@@ -27,7 +27,7 @@ export class OrdersService {
           Authorization: this.token
         })
       };
-      return this.myClient.get(`${this.baseURL}/orders/fetch/all2`, httpOptions);
+      return this.myClient.get(`${this.baseURL}/orders/fetch/all`, httpOptions);
     }
 
       /*diplay one order*/

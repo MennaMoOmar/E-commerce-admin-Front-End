@@ -11,8 +11,6 @@ import { shareReplay, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UsersService {
-  // localStorage.setItsetem('token', eltoken);
-
   constructor(private myClient: HttpClient) {
     console.log(myClient);
     console.log("ctor")
@@ -20,17 +18,11 @@ export class UsersService {
 
   tokenpw
 
-  /*local storage*/
+  /* local storage*/
   token = localStorage.getItem('token') || 'no token'
 
-
+  /* url */
   private baseURL: string = "https://amnesia-skincare.herokuapp.com/api"
-
-  // get all users
-  // getUsers(){
-  //   return this.myClient.get(this.baseURL)
-  // }
-
 
   //get profile
   getProfile() {

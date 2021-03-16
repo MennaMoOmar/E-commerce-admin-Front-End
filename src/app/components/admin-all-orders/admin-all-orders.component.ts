@@ -20,6 +20,8 @@ export class AdminAllOrdersComponent implements OnInit {
     document.getElementById('acceptPagination').style.display='block';
     document.getElementById('penddingPagination').style.display='none';
     document.getElementById('rejectPagination').style.display='none';
+    document.getElementById('orderDetails').style.display='none';
+
   }
   penddingBtn(){
     document.getElementById('status').style.display='none';
@@ -29,6 +31,8 @@ export class AdminAllOrdersComponent implements OnInit {
     document.getElementById('acceptPagination').style.display='none';
     document.getElementById('penddingPagination').style.display='block';
     document.getElementById('rejectPagination').style.display='none';
+    document.getElementById('orderDetails').style.display='none';
+
   }
   rejectedBtn(){
     document.getElementById('status').style.display='none';
@@ -37,10 +41,20 @@ export class AdminAllOrdersComponent implements OnInit {
     document.getElementById('acceptedTable').style.display='none';
     document.getElementById('acceptPagination').style.display='none';
     document.getElementById('penddingPagination').style.display='none';
+    document.getElementById('orderDetails').style.display='none';
     document.getElementById('rejectPagination').style.display='block';
   }
-  orderDetails(){}
-  
+  orderDetails(){
+    document.getElementById('status').style.display='none';
+    document.getElementById('penddingTable').style.display='none';
+    document.getElementById('rejectedTable').style.display='none';
+    document.getElementById('acceptedTable').style.display='none';
+    document.getElementById('acceptPagination').style.display='none';
+    document.getElementById('penddingPagination').style.display='none';
+    document.getElementById('rejectPagination').style.display='none';
+    document.getElementById('orderDetails').style.display='block';
+  }
+
   ngOnInit(): void {
   }
 

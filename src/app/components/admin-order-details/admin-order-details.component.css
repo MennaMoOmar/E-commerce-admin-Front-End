@@ -1,41 +1,27 @@
-/* material ui */
-.loading{
-    margin: 0 auto;
+#orderDetails .table.tbOrder td,
+#orderDetails .table.tbClient td{
+    border: none;
+    vertical-align: unset;
 }
-.mat-progress-spinner circle, .mat-spinner circle{
-    stroke: #F65B5F;
-}
-
-/* CSS */
-#orderDetail{
-    margin-top: 50px;
-}
-#orderDetail .table td{
-    border-bottom: 1px solid #dee2e6
-}
-#orderDetail h2{
-    color: #F65B5F;
-    margin-bottom: 30px;
-}
-#orderDetail .table2{
-    width: 100%;
-}
-#orderDetail .table2 td{
-    padding: 5px;
-}
-#orderDetail .tdRight{
-    float: right;
-}
-#orderDetail table thead{
+#orderDetails table thead{
     background-color: #F65B5F;
     color: #FFFFFF;
     box-shadow: 5px 5px 5px #95959595;
 }
-#orderDetail i{
+#orderDetails h3{
+    color: #F65B5F;
+    font-size: 1.3rem;
+}
+#orderDetails table td:first-child{
+    font-weight: bold;
+}
+#orderDetails h4{
     color: #F65B5F;
 }
-#orderDetail i:hover{
-    cursor: pointer;
-    margin-left: -20px;
-    transition: ease-in-out .5s;
+#orderDetails h4 span{
+    color: black;
+}
+#orderDetails img{
+    width: 50px;
+    height: 50px;
 }
