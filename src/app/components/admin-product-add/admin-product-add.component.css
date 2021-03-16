@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* #addProduct{
   background-image: url('../../../assets/images/billbg.jpg');
   background-size: cover;
@@ -11,18 +12,39 @@
   background-color: transparent;
   /* color: white; */
   color: #1d1d1d;
+=======
+#addProduct{
+  background-image: url('../../../assets/images/form2.jpeg');
+  background-size: contain;
+}
+#addProduct .wrapper{
+  background-color: black;
+  opacity: .6;
+  padding: 30px;
+}
+#addProduct .form-control{
+  background-color: transparent;
+  color: white;
+>>>>>>> 80243e92839ca77f2dc6c53be15019e461a9cccd
   border: none;
   border-bottom: 1px solid;
   border-radius: 0px;
 }
 #addProduct label{
   font-size: 1rem;
+<<<<<<< HEAD
   color: #1d1d1d;
   /* color: #FFFFFF; */
 }
 #addProduct input:focus,
 #addProduct textarea:focus,
 #addProduct select:focus{
+=======
+  color: #FFFFFF;
+}
+#addProduct input:focus,
+#addProduct textarea:focus{
+>>>>>>> 80243e92839ca77f2dc6c53be15019e461a9cccd
   box-shadow: none;
 }
 #addProduct .btn{

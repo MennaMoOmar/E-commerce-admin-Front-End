@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* #editProduct{
     background-image: url('../../../assets/images/form2.jpeg');
     background-size: contain;
@@ -5,18 +6,32 @@
 #editProduct .wrapper{
     /* background-color: black;
     opacity: .6; */
+=======
+#editProduct{
+    background-image: url('../../../assets/images/form2.jpeg');
+    background-size: contain;
+  }
+#editProduct .wrapper{
+    background-color: black;
+    opacity: .6;
+>>>>>>> 80243e92839ca77f2dc6c53be15019e461a9cccd
     padding: 30px;
 }
 #editProduct .form-control{
     background-color: transparent;
+<<<<<<< HEAD
     /* color: white; */
     color: #1d1d1d;
+=======
+    color: white;
+>>>>>>> 80243e92839ca77f2dc6c53be15019e461a9cccd
     border: none;
     border-bottom: 1px solid;
     border-radius: 0px;
 }
 #editProduct label{
     font-size: 1rem;
+<<<<<<< HEAD
     /* color: #FFFFFF; */
     color: #1d1d1d;
 
@@ -24,6 +39,12 @@
 #editProduct input:focus,
 #editProduct textarea:focus,
 #editProduct select:focus{
+=======
+    color: #FFFFFF;
+}
+#editProduct input:focus,
+#editProduct textarea:focus{
+>>>>>>> 80243e92839ca77f2dc6c53be15019e461a9cccd
     box-shadow: none;
 }
 #editProduct .btn{
